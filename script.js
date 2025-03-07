@@ -17,7 +17,6 @@ let isPlaying = false;
 let isRandom = false;
 let updateTimer;
 
-// music list
 const musicList = [
   {
     img: "./img/flower.jpg",
@@ -69,9 +68,9 @@ const musicList = [
   },
 ];
 
-// track reset load
 const initTrack = (index) => {
   reset();
+
   currTrack.src = musicList[index].music;
   trackArt.style.backgroundImage = `url(${musicList[index].img})`;
   trackName.innerText = musicList[index].name;
@@ -81,19 +80,44 @@ const initTrack = (index) => {
   currTrack.load();
   updateTimer = setInterval(setUpdate, 1000);
   currTrack.addEventListener("ended", nextTrack);
+
+  console.log(`Loaded: ${currTrack.src}`);
 };
 
-// track slider reset
+const loadTrack = (index) => {
+  clearInterval(updateTimer);
+  reset();
+
+  currTrack.src = musicList[index].music;
+  currTrack.load();
+
+  trackArt.style.backgroundImage = `url(${musicList[index].img})`;
+  trackName.innerText = musicList[index].name;
+  trackArtist.innerText = musicList[index].artist;
+  nowPlaying.innerText = `${index + 1} of ${musicList.length}`;
+
+  updateTimer = setInterval(setUpdate, 1000);
+  currTrack.addEventListener("ended", nextTrack);
+};
+
 const reset = () => {
   currTime.innerText = "00:00";
   totalDuration.innerText = "00:00";
   seekSlider.value = 0;
 };
 
-// play,stop toggle
+const toggleRandom = () => {
+  isRandom = !isRandom;
+  randomIcon.classList.toggle("randomActive");
+};
+
+const repeatTrack = () => {
+  loadTrack(trackIndex);
+  playTrack();
+};
+
 const playpauseTrack = () => (isPlaying ? pauseTrack() : playTrack());
 
-// play
 const playTrack = () => {
   currTrack.play();
   isPlaying = true;
@@ -102,16 +126,15 @@ const playTrack = () => {
   playpauseBtn.innerHTML = '<i class="fa fa-pause-circle fa-5x"></i>';
 };
 
-// stop
 const pauseTrack = () => {
   currTrack.pause();
+  currTrack.currentTime = 0;
   isPlaying = false;
   trackArt.classList.remove("rotate");
   wave.classList.remove("loader");
   playpauseBtn.innerHTML = '<i class="fa fa-play-circle fa-5x"></i>';
 };
 
-// next
 const nextTrack = () => {
   trackIndex = isRandom
     ? Math.floor(Math.random() * musicList.length)
@@ -121,14 +144,18 @@ const nextTrack = () => {
   pauseTrack();
 };
 
-// control track change
+const prevTrack = () => {
+  trackIndex = trackIndex > 0 ? trackIndex - 1 : musicList.length - 1;
+  loadTrack(trackIndex);
+  isPlaying = false;
+  pauseTrack();
+};
+
 const seekTo = () =>
   (currTrack.currentTime = currTrack.duration * (seekSlider.value / 100));
 
-// volume
 const setVolume = () => (currTrack.volume = volumeSlider.value / 100);
 
-// track update
 const setUpdate = () => {
   if (!isNaN(currTrack.duration)) {
     const seekPosition = currTrack.currentTime * (100 / currTrack.duration);
@@ -146,7 +173,6 @@ const setUpdate = () => {
   }
 };
 
-// init track
 initTrack(trackIndex);
 
 playpauseBtn.addEventListener("click", playpauseTrack);
