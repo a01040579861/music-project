@@ -34,9 +34,21 @@ body {
   background-size: cover;
   background-position: center;
   border-radius: 50%;
+  position: relative;
+  // .track-art-center {
+  //   position: absolute;
+  //   width: 50px;
+  //   height: 50px;
+  //   border-radius: 50%;
+  //   border: 5px solid map-get($map: $color, $key: light);
+  //   top: 38%;
+  //   left: 38%;
+  // }
 }
 .now-playing {
-  font-size: 0.9rem;
+  margin: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
   color: map-get($map: $color, $key: light);
 }
 .track-name {
@@ -81,7 +93,7 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  height: 5px;
+  height: 3px;
   background: map-get($map: $color, $key: volume);
   -webkit-transition: 0.2s;
   transition: opacity 0.2s;
@@ -91,8 +103,8 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   background: map-get($map: $color, $key: light);
   border: 2px solid map-get($map: $color, $key: thumb);
   cursor: grab;
@@ -111,7 +123,7 @@ body {
 .current-time,
 .total-duration {
   padding: 10px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: map-get($map: $color, $key: light);
 }
 i.fa-volume-down,
@@ -147,16 +159,7 @@ p {
   justify-content: center;
   align-items: center;
 }
-#wave {
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity 1s;
-}
 
-#wave.loader {
-  opacity: 1;
-  transform: scale(1);
-}
 .loader .stroke {
   background: map-get($map: $color, $key: light);
   height: 100%;

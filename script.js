@@ -33,7 +33,7 @@ const musicList = [
   {
     img: "./img/howls.jpg",
     name: "Howl's Moving Castle",
-    artist: "Joe Hisaishi",
+    artist: "Hisaishi Joe",
     music: "./music/howls.mp3",
   },
   {
@@ -41,6 +41,30 @@ const musicList = [
     name: "Indigo",
     artist: "Yiruma",
     music: "./music/indigo.mp3",
+  },
+  {
+    img: "./img/fall-rain.jpg",
+    name: "Fall Rain",
+    artist: "July",
+    music: "./music/fallrain.mp3",
+  },
+  {
+    img: "./img/kiki.jpg",
+    name: "Village with sea view",
+    artist: "Hisaishi Joe",
+    music: "./music/kiki.mp3",
+  },
+  {
+    img: "./img/summer.jpg",
+    name: "One summer's day",
+    artist: "Hisaishi Joe",
+    music: "./music/summer.mp3",
+  },
+  {
+    img: "./img/forest.jpg",
+    name: "In the quiet forest",
+    artist: "Healing energy",
+    music: "./music/forest.mp3",
   },
 ];
 
@@ -51,7 +75,7 @@ const initTrack = (index) => {
   trackArt.style.backgroundImage = `url(${musicList[index].img})`;
   trackName.innerText = musicList[index].name;
   trackArtist.innerText = musicList[index].artist;
-  nowPlaying.innerText = `Playlist ${index + 1} of ${musicList.length}`;
+  nowPlaying.innerText = `${index + 1} of ${musicList.length}`;
 
   currTrack.load();
   updateTimer = setInterval(setUpdate, 1000);
@@ -70,7 +94,7 @@ const loadTrack = (index) => {
   trackArt.style.backgroundImage = `url(${musicList[index].img})`;
   trackName.innerText = musicList[index].name;
   trackArtist.innerText = musicList[index].artist;
-  nowPlaying.innerText = `Playlist ${index + 1} of ${musicList.length}`;
+  nowPlaying.innerText = `${index + 1} of ${musicList.length}`;
 
   updateTimer = setInterval(setUpdate, 1000);
   currTrack.addEventListener("ended", nextTrack);
@@ -116,13 +140,15 @@ const nextTrack = () => {
     ? Math.floor(Math.random() * musicList.length)
     : (trackIndex + 1) % musicList.length;
   loadTrack(trackIndex);
-  playTrack();
+  isPlaying = false;
+  pauseTrack();
 };
 
 const prevTrack = () => {
   trackIndex = trackIndex > 0 ? trackIndex - 1 : musicList.length - 1;
   loadTrack(trackIndex);
-  playTrack();
+  isPlaying = false;
+  pauseTrack();
 };
 
 const seekTo = () =>

@@ -52,10 +52,13 @@ body {
   background-size: cover;
   background-position: center;
   border-radius: 50%;
+  position: relative;
 }
 
 .now-playing {
-  font-size: 0.9rem;
+  margin: 10px;
+  font-size: 0.8rem;
+  font-weight: bold;
   color: #fff;
 }
 
@@ -114,7 +117,7 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  height: 5px;
+  height: 3px;
   background: #d4a373;
   transition: opacity 0.2s;
 }
@@ -124,8 +127,8 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  width: 15px;
-  height: 15px;
+  width: 10px;
+  height: 10px;
   background: #fff;
   border: 2px solid #d5914d;
   cursor: grab;
@@ -148,7 +151,7 @@ body {
 .current-time,
 .total-duration {
   padding: 10px;
-  font-size: 1rem;
+  font-size: 0.8rem;
   color: #fff;
 }
 
@@ -188,17 +191,6 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-#wave {
-  opacity: 0;
-  transform: scale(0.5);
-  transition: opacity 1s;
-}
-
-#wave.loader {
-  opacity: 1;
-  transform: scale(1);
 }
 
 .loader .stroke {
