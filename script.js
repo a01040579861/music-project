@@ -140,15 +140,13 @@ const nextTrack = () => {
     ? Math.floor(Math.random() * musicList.length)
     : (trackIndex + 1) % musicList.length;
   loadTrack(trackIndex);
-  isPlaying = false;
-  pauseTrack();
+  if (isPlaying) playTrack();
 };
 
 const prevTrack = () => {
   trackIndex = trackIndex > 0 ? trackIndex - 1 : musicList.length - 1;
   loadTrack(trackIndex);
-  isPlaying = false;
-  pauseTrack();
+  if (isPlaying) playTrack();
 };
 
 const seekTo = () =>
